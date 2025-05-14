@@ -43,7 +43,7 @@
                 <a href="#" class="text-sm text-white underline mb-2 no-underline">Forgot Username or Password?</a>
 
                 <!-- Create Account Link -->
-                <a href="#" class="text-md tracking-wide text-white mt-10">Create new account</a>
+                <a href="/register" class="text-md tracking-wide text-white mt-10">Create new account</a>
             </form>
         </div>
     </div>
