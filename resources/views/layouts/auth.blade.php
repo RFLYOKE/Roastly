@@ -12,8 +12,8 @@
 <body>
     <div class="relative w-full h-screen"
         style="background-image: url('{{ asset('img/hero.jpg') }}');
-        background-size: contain;
-        background-position: center
+        background-size: cover;
+        background-position: center;
         background-repeat: no-repeat">
         <div class="absolute inset-0 bg-white opacity-60"></div>
         <div class="absolute inset-0 bg-linear-to-r from-black/50 to-black/70"></div>
