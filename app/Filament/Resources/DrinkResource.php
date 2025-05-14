@@ -15,6 +15,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\FileUpload;
+use Filament\Tables\Columns\ImageColumn;
 
 
 class DrinkResource extends Resource
@@ -38,6 +40,15 @@ class DrinkResource extends Resource
                 TextInput::make('price')
                     ->numeric()
                     ->required(),
+                
+                FileUpload::make('image')
+                    ->image()
+                    ->directory('drinks')
+                    ->disk('public') 
+                    ->imagePreviewHeight('200')
+                    ->downloadable()
+                    ->openable()
+                    ->nullable(),
             ]);
     }
 
@@ -49,6 +60,12 @@ class DrinkResource extends Resource
                 TextColumn::make('price'),
                 TextColumn::make('category.name')->label('Category'),
                 TextColumn::make('created_at')->dateTime(),
+                ImageColumn::make('image')
+                    ->label('Image')
+                    ->disk('public') // agar ambil dari /storage
+                    ->height(50)
+                    ->width(50),
+
             ])
             ->filters([
                 //

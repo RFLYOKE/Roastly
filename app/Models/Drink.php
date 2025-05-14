@@ -9,6 +9,13 @@ class Drink extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'kategori_id',
+        'name',
+        'price',
+        'image',
+    ];
+
     public function kategori()
     {
         return $this->belongsTo(Kategori::class);

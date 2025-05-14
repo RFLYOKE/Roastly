@@ -28,5 +28,10 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('123'), // Ganti password ini 
             'email_verified_at' => now(),
         ]);
+
+        $this->call([
+            KategoriSeeder::class,
+            ToppingSeeder::class,
+        ]);
     }
 }
