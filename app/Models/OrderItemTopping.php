@@ -9,6 +9,11 @@ class OrderItemTopping extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'order_item_id',
+        'topping_id',
+    ];
+
     public function topping()
     {
         return $this->belongsTo(Topping::class);
