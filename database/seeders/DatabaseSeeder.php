@@ -27,6 +27,16 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@toko.com',
             'password' => Hash::make('123'), // Ganti password ini 
             'email_verified_at' => now(),
+            'role' => 'admin',
+        ]);
+
+        // Pelanggan user
+        User::create([
+            'name' => 'agnes',
+            'email' => 'agnes@toko.com',
+            'password' => Hash::make('123'), // Ganti password ini 
+            'email_verified_at' => now(),
+            'role' => 'costumer',
         ]);
 
         $this->call([
