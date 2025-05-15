@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 item.classList.toggle("hidden");
             });
 
-            // Ubah teks tombol (opsional)
             const text = buttonMenu.querySelector("p");
             if (text && text.innerText === "Show Menu") {
                 text.innerText = "Hide Menu";
