@@ -22,8 +22,8 @@
                     </div>
                 </div>
             @endif
-
-            @if (!$already_logged_in)
+            
+           @if (!isset($already_logged_in) || !$already_logged_in)
              <!-- Form -->
              <form action="{{ route('login') }}" method="POST" class="flex flex-col items-center w-80 mt-5">
                 @csrf
