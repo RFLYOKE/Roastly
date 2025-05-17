@@ -10,7 +10,16 @@
 </head>
 
 <body class="pb-2 bg-[#FEFDF8]">
-    <header class="w-full text-center sticky top-0 left-0 pt-8 pb-2 bg-[#FEFDF8]">
+    <header class="w-full text-center sticky top-0 left-0 pt-8 pb-2 bg-[#FEFDF8] relative">
+        <div class="absolute top-4 right-6">
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded-lg shadow-md hover:bg-red-600">
+                    Logout
+                </button>
+            </form>
+        </div>
+        
         <h1 class="text-xl font-bold text-[#B97D0E]">OUR MENU</h1>
         <h1 class="text-4xl font-bold text-[#402F0B]">Find Your Favorite Cup</h1>
         @php

@@ -8,7 +8,7 @@
             <img src="{{ asset('icon/logoRoastly.png') }}" alt="">
             <h1 class="font-bold text-3xl text-white">Create Account</h1>
              <!-- Form -->
-             <form action="#" method="POST" class="flex flex-col items-center w-80 mt-5">
+             <form action="{{ route('register') }}" method="POST" class="flex flex-col items-center w-80 mt-5">
                 @csrf
                 <!-- Email -->
                 <div class="w-full mb-4 relative">
