@@ -20,7 +20,7 @@
         </div>
     </header>
     <main class="my-4">
-        <div class="grid grid-cols-3 gap-x-8 *:h-[30rem]">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 *:h-[30rem]">
             <div class="bg-white p-6 rounded-lg shadow-md flex justify-center">
                 @yield('image')
             </div>
