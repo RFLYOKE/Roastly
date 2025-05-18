@@ -47,8 +47,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/menu/tea', function () {
         return view('tea');
     });
+
     Route::get('/menu/details_order', function () {
         return view('detailsMenu/orderdetails');
+    });
+
+    Route::get('/menu/payment_order', function () {
+        return view('detailsMenu/orderbills');
     });
 });
 
