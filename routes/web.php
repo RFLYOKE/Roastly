@@ -47,6 +47,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/menu/tea', function () {
         return view('tea');
     });
+    Route::get('/menu/details_order', function () {
+        return view('detailsMenu/orderdetails');
+    });
 });
 
 require __DIR__.'/auth.php';
