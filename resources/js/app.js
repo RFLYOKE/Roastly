@@ -1,5 +1,10 @@
 import './bootstrap';
 
+import Alpine from 'alpinejs';
+
+window.Alpine = Alpine;
+
+Alpine.start();
 document.addEventListener("DOMContentLoaded", function () {
     const buttonMenu = document.getElementById("button-menu");
     const menuItems = document.querySelectorAll(".showMenu");
