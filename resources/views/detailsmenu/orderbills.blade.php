@@ -27,7 +27,7 @@
                     <!-- Header -->
                     <div
                         class="flex items-center justify-between bg-yellow-700 text-white font-semibold rounded-lg px-8 py-3 shadow-md">
-                        <div class="w-1/2">Product</div>
+                        <div class="w-1/3">Product</div>
                         <div>Price</div>
                         <div>Quantity</div>
                         <div>Subtotal</div>
@@ -37,9 +37,9 @@
                         <div
                             class="flex justify-between items-center bg-white text-[#B97D0E] font-medium rounded-lg px-6 py-3 shadow-md">
                             <!-- Product -->
-                            <div class="w-1/2 flex items-center">
+                            <div class="w-1/3 flex items-center">
                                 <img src="{{ asset('img/coffeeTest.png') }}" alt="Hazelnut Latte"
-                                    class="w-10 h-10 rounded-full object-cover" />
+                                    class="w-20 h-20 rounded-full object-cover" />
                                 <p>Hazelnut Latte</p>
                             </div>
                             <div>Rp 25.000</div>
@@ -58,7 +58,7 @@
             </div>
 
             <!-- Ringkasan Order -->
-            <div class="h-1/2 bg-white rounded-lg px-6 pt-6 shadow-md">
+            <div class="md:h-[23rem] bg-white rounded-lg px-6 pt-6 shadow-md">
                 <h2 class="text-lg font-semibold mb-4">Order Summary</h2>
                 <div class="space-y-2 text-sm text-gray-700">
                     <div class="flex justify-between">

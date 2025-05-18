@@ -87,7 +87,7 @@
                     <button
                         class="px-6 py-2 border border-yellow-600 text-yellow-600 rounded-full hover:bg-yellow-100 transition">ADD
                         TO CART</button>
-                    <button class="px-6 py-2 bg-yellow-700 text-white rounded-full hover:bg-yellow-800 transition">BUY
+                    <button onclick="window.location.href='/menu/payment_order'" class="px-6 py-2 bg-yellow-700 text-white rounded-full hover:bg-yellow-800 transition">BUY
                         NOW</button>
                 </div>
             </div>
