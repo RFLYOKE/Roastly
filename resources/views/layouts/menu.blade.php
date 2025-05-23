@@ -34,7 +34,7 @@
             ];
         @endphp
 
-        <nav class="pt-10 px-12">
+        <nav class="pt-10 px-2 md:px-12">
             <div class="flex lg:hidden mb-4">
                 <div id="button-menu" class="shadow-lg rounded-lg px-3 py-2 flex items-center gap-x-2 bg-[#402F0B]">
                     <span class="p-2 bg-white rounded-full">
@@ -56,7 +56,7 @@
         </nav>
     </header>
     <main class="flex items-center justify-center mt-8 w-full">
-        <div class="flex flex-wrap items-center justify-center lg:w-3/4 gap-4">
+        <div class="grid grid-cols-2 md:flex md:flex-wrap  items-center justify-center lg:w-3/4 gap-4">
             @yield('content')
         </div>
     </main>

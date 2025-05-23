@@ -30,25 +30,13 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/menu/{id}', [MenuController::class, 'show'])->name('menu.show');
 
-    // Route::get('/menu/coffee', function () {
-    //     return view('coffee');
-    // });
+    Route::get('/menu/details_order', function () {
+        return view('detailsMenu/orderdetails');
+    });
 
-    // Route::get('/menu/milk', function () {
-    //     return view('milk');
-    // });
-
-    // Route::get('/menu/frappe', function () {
-    //     return view('frappe');
-    // });
-
-    // Route::get('/menu/dessert', function () {
-    //     return view('dessert');
-    // });
-
-    // Route::get('/menu/tea', function () {
-    //     return view('tea');
-    // });
+    Route::get('/menu/payment_order', function () {
+        return view('detailsMenu/orderbills');
+    });
 });
 
 require __DIR__.'/auth.php';
