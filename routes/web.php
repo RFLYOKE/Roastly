@@ -25,18 +25,16 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    Route::get('/menu/details_order/{id}', [MenuController::class, 'showOrderDetail'])->middleware('auth');
+
+    Route::post('/menu/add-to-cart', [MenuController::class, 'addToCart'])->name('cart.add');
+    Route::get('/menu/cart', [MenuController::class, 'showCart'])->name('cart.index');
+    Route::post('/menu/cart/update', [MenuController::class, 'updateCartItem'])->name('cart.update');
+    Route::delete('/menu/cart/remove/{index}', [MenuController::class, 'removeCartItem'])->name('cart.remove');
+
     Route::get('/menu/{kategori}', [MenuController::class, 'all'])
         ->middleware(['auth', 'verified']);
-
-    Route::get('/menu/{id}', [MenuController::class, 'show'])->name('menu.show');
-
-    Route::get('/menu/details_order', function () {
-        return view('detailsMenu/orderdetails');
-    });
-
-    Route::get('/menu/payment_order', function () {
-        return view('detailsMenu/orderbills');
-    });
+    
 });
 
 require __DIR__.'/auth.php';

@@ -12,6 +12,7 @@ class Drink extends Model
     protected $fillable = [
         'kategori_id',
         'name',
+        'description',
         'price',
         'image',
     ];

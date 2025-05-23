@@ -11,7 +11,13 @@
 
 <body class="pb-2 bg-[#FEFDF8]">
     <header class="w-full text-center sticky top-0 left-0 pt-8 pb-2 bg-[#FEFDF8] relative">
-        <div class="absolute top-4 right-6">
+        <div class="absolute top-4 right-6 flex gap-2">
+            <!-- Tombol Cart -->
+            <a href="{{ route('cart.index') }}"
+            class="py-2 px-8 shadow-md rounded-lg text-md font-semibold transition hover:bg-[#402F0B] hover:text-white bg-white text-[#402F0B]">
+                Cart
+            </a>
+
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded-lg shadow-md hover:bg-red-600">

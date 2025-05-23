@@ -37,6 +37,9 @@ class DrinkResource extends Resource
                 TextInput::make('name')
                     ->required(),
 
+                TextInput::make('description')
+                    ->nullable(),
+
                 TextInput::make('price')
                     ->numeric()
                     ->required(),
@@ -58,11 +61,11 @@ class DrinkResource extends Resource
             ->columns([
                 TextColumn::make('name'),
                 TextColumn::make('price'),
-                TextColumn::make('category.name')->label('Category'),
+                TextColumn::make('kategori.name')->label('Kategori'),
                 TextColumn::make('created_at')->dateTime(),
                 ImageColumn::make('image')
                     ->label('Image')
-                    ->disk('public') // agar ambil dari /storage
+                    ->disk('public') 
                     ->height(50)
                     ->width(50),
 

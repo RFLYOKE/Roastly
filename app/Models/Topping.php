@@ -9,6 +9,12 @@ class Topping extends Model
 {
     use HasFactory;
 
+     protected $fillable = [
+        'name',
+        'price',
+        'type', 
+    ];
+    
     public function orderItemToppings()
     {
         return $this->hasMany(OrderItemTopping::class);

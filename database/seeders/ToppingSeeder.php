@@ -13,17 +13,17 @@ class ToppingSeeder extends Seeder
     public function run(): void
     {
         $toppings = [
-            ['name' => 'No Sugar', 'price' => 0],
-            ['name' => 'Low Sugar', 'price' => 0],
-            ['name' => 'Extra Sugar', 'price' => 0],
-            ['name' => '2 Shots Espresso', 'price' => 5000],
-            ['name' => '3 Shots Espresso', 'price' => 8000],
-            ['name' => 'Whipped Cream', 'price' => 3000],
-            ['name' => 'Oreo Crumble', 'price' => 4000],
-            ['name' => 'Brown Sugar Jelly', 'price' => 3500],
-            ['name' => 'Cheese Foam', 'price' => 5000],
-            ['name' => 'Extra Ice', 'price' => 0],
-            ['name' => 'Less Ice', 'price' => 0],
+            ['name' => 'Less', 'price' => 0, 'type' => 'sugar'],
+            ['name' => 'Normal', 'price' => 0, 'type' => 'sugar'],
+            ['name' => 'Extra', 'price' => 0, 'type' => 'sugar'],
+
+            ['name' => 'Small', 'price' => 0, 'type' => 'size'],      
+            ['name' => 'Medium', 'price' => 3000, 'type' => 'size'],  
+            ['name' => 'Large', 'price' => 5000, 'type' => 'size'],   
+            
+            ['name' => 'Less', 'price' => 0, 'type' => 'ice'],
+            ['name' => 'Normal', 'price' => 0, 'type' => 'ice'],
+            ['name' => 'Extra', 'price' => 0, 'type' => 'ice'],
         ];
 
         foreach ($toppings as $topping) {

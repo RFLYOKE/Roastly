@@ -42,6 +42,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             KategoriSeeder::class,
             ToppingSeeder::class,
+            DrinkSeeder::class,
         ]);
     }
 }
