@@ -1,7 +1,9 @@
 @extends('layouts.menu')
 
 @section('content')
-    @for ($i = 0; $i < 10; $i++)
-        @include('components.card')
-    @endfor
+    @forelse ($drinks as $drink)
+        @include('components.card', ['drink' => $drink])
+    @empty
+        <p class="text-gray-500">Tidak ada minuman ditemukan.</p>
+    @endforelse
 @endsection

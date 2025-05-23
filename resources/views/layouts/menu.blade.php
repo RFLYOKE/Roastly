@@ -27,7 +27,7 @@
                 'All' => 'menu',
                 'Signature' => 'menu/signature',
                 'Coffee' => 'menu/coffee',
-                'Milk Based' => 'menu/milk',
+                'Milk Based' => 'menu/milk based',
                 'Frappe' => 'menu/frappe',
                 'Dessert' => 'menu/dessert',
                 'Tea' => 'menu/tea',
