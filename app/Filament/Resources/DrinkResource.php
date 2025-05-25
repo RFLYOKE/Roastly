@@ -25,6 +25,11 @@ class DrinkResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Cafe Management';
+    }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -59,10 +64,12 @@ class DrinkResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name'),
+                TextColumn::make('name')    
+                    ->searchable()->sortable(),
                 TextColumn::make('price'),
-                TextColumn::make('kategori.name')->label('Kategori'),
-                TextColumn::make('created_at')->dateTime(),
+                TextColumn::make('kategori.name')->label('Kategori')
+                    ->searchable()->sortable(),
+                TextColumn::make('created_at')->dateTime()->sortable(),
                 ImageColumn::make('image')
                     ->label('Image')
                     ->disk('public') 

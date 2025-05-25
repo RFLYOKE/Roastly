@@ -17,6 +17,10 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use App\Filament\Resources\DrinkResource;
+use App\Filament\Resources\KategoriResource;
+use App\Filament\Resources\OrderResource;
+use Filament\Navigation\NavigationGroup;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -53,6 +57,16 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
+            ])
+            ->navigationGroups([
+                NavigationGroup::make()
+                    ->label('Cafe Management')
+                    ->collapsed(true), // collapsed true jika ingin jadi menu dropdown
+            ])
+            ->resources([
+                DrinkResource::class,
+                KategoriResource::class,
+                OrderResource::class,
             ]);
     }
 }

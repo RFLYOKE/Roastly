@@ -31,9 +31,14 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
 
+    Route::get('/menu/payment-method/{order}', [OrderController::class, 'showPaymentPage'])->name('payment.page');
+    Route::post('/menu/payment-method/{order}', [OrderController::class, 'processPayment'])->name('payment.process');
+
     Route::get('/order-success', function () {
         return view('payment.success');
     })->name('order.success');
+
+
 
     // Route::get('/menu/payment_order', function () {
     //     return view('detailsmenu.orderbills');

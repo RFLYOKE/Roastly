@@ -5,11 +5,51 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\OrderItemTopping;
+use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
+    // Method menampilkan halaman payment (kirim order ke view)
+    public function showPaymentPage(Order $order)
+    {
+        // Pastikan order milik user
+        if ($order->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        $totalItems = $order->items()->sum('quantity'); 
+
+        return view('payment.payments', compact('order', 'totalItems'));
+    }
+
+    // Method proses payment dari form
+    public function processPayment(Request $request, Order $order)
+    {
+        if ($order->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        $request->validate([
+            'payment_method' => 'required|string',
+        ]);
+
+        // Simpan payment, set status paid
+        $payment = Payment::updateOrCreate(
+            ['order_id' => $order->id],
+            [
+                'payment_method' => $request->payment_method,
+            ]
+        );
+
+        // Update status order jadi paid
+        $order->update(['status' => 'paid']);
+
+        // Redirect ke halaman success
+        return redirect()->route('order.success')->with('success', 'Payment successful!');
+    }
+
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -69,7 +109,7 @@ class OrderController extends Controller
             session()->forget('cart');
             
             // return response()->json(['message' => 'Order placed successfully', 'order_id' => $order->id], 201);
-            return redirect()->route('order.success')->with('success', 'Order placed successfully!');
+            return redirect()->route('payment.page', $order->id);
 
         } catch (\Exception $e) {
             DB::rollBack();
