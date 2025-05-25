@@ -4,12 +4,9 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\OrderController;
 use App\Models\Drink;
 use App\Models\Kategori;
-
-// Route::get('/', function () {
-//     return view('login');
-// });
 
 Route::get('/', function () {
     $already_logged_in = Auth::check();
@@ -30,11 +27,27 @@ Route::middleware('auth')->group(function () {
     Route::post('/menu/add-to-cart', [MenuController::class, 'addToCart'])->name('cart.add');
     Route::get('/menu/cart', [MenuController::class, 'showCart'])->name('cart.index');
     Route::post('/menu/cart/update', [MenuController::class, 'updateCartItem'])->name('cart.update');
-    Route::delete('/menu/cart/remove/{index}', [MenuController::class, 'removeCartItem'])->name('cart.remove');
+    Route::delete('/menu/cart/remove/{uuid}', [MenuController::class, 'removeCartItem'])->name('cart.remove');
 
+    Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
+
+    Route::get('/order-success', function () {
+        return view('payment.success');
+    })->name('order.success');
+
+    // Route::get('/menu/payment_order', function () {
+    //     return view('detailsmenu.orderbills');
+    // });
+
+    // Route::get('/menu/payment-method', function () {
+    //     return view('payment.payments');
+    // });
+    // Route::get('/menu/payment-method/success', function () {
+    //     return view('payment.success');
+    // });
+    
     Route::get('/menu/{kategori}', [MenuController::class, 'all'])
         ->middleware(['auth', 'verified']);
-    
 });
 
 require __DIR__.'/auth.php';

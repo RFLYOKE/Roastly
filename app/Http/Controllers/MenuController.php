@@ -7,6 +7,7 @@ use App\Models\Kategori;
 use App\Models\Topping;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 
 class MenuController extends Controller
 {
@@ -44,7 +45,13 @@ class MenuController extends Controller
         $additionalPrice = $toppings->sum('price');
         $itemPrice = $drink->price + $additionalPrice;
 
-        $cartItem = [
+        $cart = Session::get('cart', []);
+
+        // Generate UUID for uniqueness
+        $uuid = Str::uuid()->toString();
+
+        $cart[$uuid] = [
+            'uuid' => $uuid,
             'drink_id' => $drink->id,
             'drink_name' => $drink->name,
             'drink_image' => $drink->image,
@@ -54,22 +61,6 @@ class MenuController extends Controller
             'item_price' => $itemPrice,
             'subtotal' => $itemPrice * $validated['quantity'],
         ];
-
-        $cart = Session::get('cart', []);
-        $found = false;
-
-        foreach ($cart as &$item) {
-            if ($item['drink_id'] == $cartItem['drink_id'] && json_encode($item['toppings']) === json_encode($cartItem['toppings'])) {
-                $item['quantity'] += $cartItem['quantity'];
-                $item['subtotal'] += $cartItem['subtotal'];
-                $found = true;
-                break;
-            }
-        }
-
-        if (!$found) {
-            $cart[] = $cartItem;
-        }
 
         Session::put('cart', $cart);
 
@@ -87,43 +78,42 @@ class MenuController extends Controller
     public function updateCartItem(Request $request)
     {
         $validated = $request->validate([
-            'index' => 'required|integer',
+            'uuid' => 'required|string',
             'quantity' => 'required|integer|min:0',
         ]);
 
         $cart = Session::get('cart', []);
-        $index = $validated['index'];
-        $quantity = $validated['quantity'];
+        $uuid = $validated['uuid'];
 
-        if (!isset($cart[$index])) {
+        if (!isset($cart[$uuid])) {
             return response()->json(['success' => false, 'message' => 'Item tidak ditemukan.'], 404);
         }
 
-        if ($quantity > 0) {
-            $cart[$index]['quantity'] = $quantity;
-            $cart[$index]['subtotal'] = $cart[$index]['item_price'] * $quantity;
+        if ($validated['quantity'] > 0) {
+            $cart[$uuid]['quantity'] = $validated['quantity'];
+            $cart[$uuid]['subtotal'] = $cart[$uuid]['item_price'] * $validated['quantity'];
             Session::put('cart', $cart);
         } else {
-            return $this->removeCartItem($index);
+            return $this->removeCartItem($uuid);
         }
 
         return response()->json([
             'success' => true,
             'message' => 'Kuantitas diperbarui.',
-            'item' => $cart[$index],
+            'item' => $cart[$uuid],
             'total_price' => $this->calculateCartTotal($cart),
         ]);
     }
 
-    public function removeCartItem($index)
+    public function removeCartItem($uuid)
     {
         $cart = Session::get('cart', []);
 
-        if (!isset($cart[$index])) {
+        if (!isset($cart[$uuid])) {
             return response()->json(['success' => false, 'message' => 'Item tidak ditemukan.'], 404);
         }
 
-        array_splice($cart, $index, 1);
+        unset($cart[$uuid]);
         Session::put('cart', $cart);
 
         return response()->json([

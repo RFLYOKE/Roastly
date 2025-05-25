@@ -17,7 +17,7 @@ class OrderController extends Controller
             'items' => 'required|array',
             'items.*.drink_id' => 'required|exists:drinks,id',
             'items.*.quantity' => 'required|integer|min:1',
-            'items.*.toppings' => 'array',
+            'items.*.toppings' => 'nullable|array',
             'items.*.toppings.*' => 'exists:toppings,id',
         ]);
 
@@ -28,7 +28,7 @@ class OrderController extends Controller
 
             $order = Order::create([
                 'user_id' => $validated['user_id'],
-                'total_price' => 0, // Diupdate nanti
+                'total_price' => 0, // nanti diupdate
                 'status' => 'pending',
             ]);
 
@@ -41,7 +41,7 @@ class OrderController extends Controller
                     'order_id' => $order->id,
                     'drink_id' => $drink->id,
                     'quantity' => $item['quantity'],
-                    'subtotal' => 0, // Nanti dihitung
+                    'subtotal' => 0,
                 ]);
 
                 if (!empty($item['toppings'])) {
@@ -66,11 +66,15 @@ class OrderController extends Controller
 
             DB::commit();
 
-            return response()->json(['message' => 'Order placed successfully', 'order_id' => $order->id], 201);
+            session()->forget('cart');
+            
+            // return response()->json(['message' => 'Order placed successfully', 'order_id' => $order->id], 201);
+            return redirect()->route('order.success')->with('success', 'Order placed successfully!');
 
         } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json(['error' => $e->getMessage()], 500);
+            // return response()->json(['error' => $e->getMessage()], 500);
+            return back()->withErrors(['error' => 'Failed to place order: ' . $e->getMessage()]);
         }
     }
 }
